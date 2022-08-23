@@ -1,0 +1,5 @@
+target 'architecture-components-ios' do
+  use_frameworks!
+  platform :ios, '14.1'
+  pod 'architecture-components-shared', :path => '../architecture-components-shared'
+end
