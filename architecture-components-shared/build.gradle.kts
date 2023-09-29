@@ -1,3 +1,4 @@
+@file:Suppress("UnstableApiUsage")
 import com.gperre.jopit.android.gradle.dependencies.*
 
 plugins {
@@ -29,6 +30,7 @@ kotlin {
 }
 
 android {
+    namespace = "com.gperre.jopit.architecture.components"
     compileSdk = AndroidSdk.compile
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {

@@ -1,3 +1,4 @@
+@file:Suppress("UnstableApiUsage")
 import com.gperre.jopit.android.gradle.dependencies.*
 
 plugins {
@@ -9,6 +10,7 @@ plugins {
 }
 
 android {
+    namespace = "com.gperre.jopit.architecture.components.android"
     compileSdk = AndroidSdk.compile
 
     defaultConfig {
@@ -38,7 +40,6 @@ android {
 }
 
 dependencies {
-    implementation("com.github.imagekit-developer:imagekit-android:2.0.1")
     implementation(Okhttp.interceptors)
     implementation(Okhttp.core)
     implementation(Gson.gson)

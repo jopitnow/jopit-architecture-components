@@ -51,11 +51,6 @@ class NetworkModule {
     ): NetworkUtils = NetworkUtils(context)
 
     @Provides
-    fun providesURLBuilder(
-        @ApplicationContext context: Context
-    ): URLBuilder = URLBuilder(context.applicationInfo)
-
-    @Provides
     fun providesRetrofitClient(
         gson: GsonBuilder,
         okHttpBuilder: OkHttpBuilder,
