@@ -14,11 +14,11 @@ buildscript {
         }
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.4.2")
-        classpath ("com.google.dagger:hilt-android-gradle-plugin:2.42")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0")
-        classpath("com.gperre.jopit:publish:1.0.0")
-        classpath("com.gperre.jopit:configuration:1.0.0")
+        classpath("com.android.tools.build:gradle:8.1.2")
+        classpath ("com.google.dagger:hilt-android-gradle-plugin:2.48")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0")
+        classpath("com.gperre.jopit:publish:1.0.11")
+        classpath("com.gperre.jopit:configuration:1.0.6")
     }
 }
 
