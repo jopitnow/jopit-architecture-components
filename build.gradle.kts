@@ -17,8 +17,8 @@ buildscript {
         classpath("com.android.tools.build:gradle:8.1.2")
         classpath ("com.google.dagger:hilt-android-gradle-plugin:2.48")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0")
-        classpath("com.gperre.jopit:publish:1.0.11")
-        classpath("com.gperre.jopit:configuration:1.0.6")
+        classpath("com.gperre.jopit:publish:1.0.13")
+        classpath("com.gperre.jopit:configuration:1.0.12")
     }
 }
 
