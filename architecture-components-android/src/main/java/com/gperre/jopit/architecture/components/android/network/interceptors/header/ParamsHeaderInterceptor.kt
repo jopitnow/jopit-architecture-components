@@ -5,12 +5,13 @@ import com.gperre.jopit.architecture.components.android.network.interceptors.mod
 import javax.inject.Inject
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-class ParamsHeaderInterceptor @Inject constructor() {
+class ParamsHeaderInterceptor @Inject constructor(
+    private val repository: HeaderRepository
+) {
 
     fun getMap(): Map<String, String> {
         return mutableMapOf<String, String>().apply {
-            // TODO: Traer el token aca para mandarlo en el header
-            put(AUTHORIZATION, "token")
+            put(AUTHORIZATION, repository.getAuthorizationToken())
         }
     }
 }

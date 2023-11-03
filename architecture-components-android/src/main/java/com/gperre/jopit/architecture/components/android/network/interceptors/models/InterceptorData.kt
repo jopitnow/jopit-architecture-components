@@ -2,6 +2,7 @@ package com.gperre.jopit.architecture.components.android.network.interceptors.mo
 
 object InterceptorData {
     const val AUTHORIZATION = "Authorization"
+    const val BEARER_AUTHORIZATION = "Bearer"
     const val CONTENT_TYPE_VALUE = "application/json; charset=utf-8"
     const val CACHE_CONTROL = "Cache-Control"
     const val CACHE_PUBLIC = "public, "
