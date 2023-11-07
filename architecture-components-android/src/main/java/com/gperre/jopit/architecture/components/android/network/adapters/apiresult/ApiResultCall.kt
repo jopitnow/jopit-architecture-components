@@ -1,7 +1,5 @@
 package com.gperre.jopit.architecture.components.android.network.adapters.apiresult
 
-import com.gperre.jopit.architecture.components.android.network.errors.KnowErrors
-import com.gperre.jopit.architecture.components.android.network.errors.ServiceError
 import com.gperre.jopit.architecture.components.android.network.errors.managers.ServiceErrorManager
 import okhttp3.Request
 import okio.Timeout
@@ -20,21 +18,9 @@ class ApiResultCall<T>(
         delegate.enqueue(object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
                 if (response.isSuccessful) {
-                    response.body()?.let { body ->
-                        callback.onResponse(
-                            this@ApiResultCall,
-                            Response.success(ApiResult.SUCCESS(body))
-                        )
-                    } ?: callback.onResponse(
-                        this@ApiResultCall, Response.success(
-                            ApiResult.ERROR(
-                                ServiceError(
-                                    KnowErrors.APP_UNHANDLED_ERROR,
-                                    200,
-                                    "Response was empty or is null."
-                                )
-                            )
-                        )
+                    callback.onResponse(
+                        this@ApiResultCall,
+                        Response.success(ApiResult.SUCCESS(response.body()))
                     )
                 } else {
                     val serviceError = serviceErrorManager.process(HttpException(response))
