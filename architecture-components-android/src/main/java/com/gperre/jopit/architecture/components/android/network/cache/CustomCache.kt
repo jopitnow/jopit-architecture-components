@@ -2,12 +2,12 @@ package com.gperre.jopit.architecture.components.android.network.cache
 
 import com.gperre.jopit.architecture.components.android.network.cache.models.Entry
 import com.gperre.jopit.architecture.components.android.network.cache.utils.FileUtils
-import okhttp3.Request
-import okhttp3.Response
-import okio.ByteString
 import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
+import okhttp3.Request
+import okhttp3.Response
+import okio.ByteString
 
 @Singleton
 class CustomCache @Inject constructor(

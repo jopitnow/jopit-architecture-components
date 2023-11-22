@@ -1,4 +1,4 @@
-package com.gperre.jopit.architecture.components.android.network.adapters.apiresult
+package com.gperre.jopit.architecture.components.android.network.adapters.apiresult.empty
 
 import com.gperre.jopit.architecture.components.android.network.errors.managers.ServiceErrorManager
 import okhttp3.Request
@@ -8,43 +8,43 @@ import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
 
-class ApiResultCall<T>(
-    private val delegate: Call<T>
-) : Call<ApiResult<T>> {
+class EmptyApiResultCall(
+    private val delegate: Call<Unit>
+) : Call<EmptyApiResult> {
 
     val serviceErrorManager = ServiceErrorManager()
 
-    override fun enqueue(callback: Callback<ApiResult<T>>) {
-        delegate.enqueue(object : Callback<T> {
-            override fun onResponse(call: Call<T>, response: Response<T>) {
+    override fun enqueue(callback: Callback<EmptyApiResult>) {
+        delegate.enqueue(object : Callback<Unit> {
+            override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                 if (response.isSuccessful) {
                     callback.onResponse(
-                        this@ApiResultCall,
-                        Response.success(ApiResult.SUCCESS(response.body()))
+                        this@EmptyApiResultCall,
+                        Response.success(EmptyApiResult.SUCCESS)
                     )
                 } else {
                     val serviceError = serviceErrorManager.process(HttpException(response))
                     callback.onResponse(
-                        this@ApiResultCall,
-                        Response.success(ApiResult.ERROR(serviceError))
+                        this@EmptyApiResultCall,
+                        Response.success(EmptyApiResult.ERROR(serviceError))
                     )
                 }
 
             }
 
-            override fun onFailure(call: Call<T>, throwable: Throwable) {
+            override fun onFailure(call: Call<Unit>, throwable: Throwable) {
                 val serviceError = serviceErrorManager.process(throwable)
                 callback.onResponse(
-                    this@ApiResultCall,
-                    Response.success(ApiResult.ERROR(serviceError))
+                    this@EmptyApiResultCall,
+                    Response.success(EmptyApiResult.ERROR(serviceError))
                 )
             }
         })
     }
 
-    override fun clone(): Call<ApiResult<T>> = ApiResultCall(delegate.clone())
+    override fun clone(): Call<EmptyApiResult> = EmptyApiResultCall(delegate.clone())
 
-    override fun execute(): Response<ApiResult<T>> {
+    override fun execute(): Response<EmptyApiResult> {
         throw UnsupportedOperationException("NetworkResponseCall doesn't support execute")
     }
 

@@ -6,8 +6,8 @@ import com.gperre.jopit.architecture.components.android.network.errors.KnowError
 import com.gperre.jopit.architecture.components.android.network.errors.ServiceError
 import com.gperre.jopit.architecture.components.android.network.errors.dto.WSError
 import com.gperre.jopit.architecture.components.android.network.exceptions.NoNetworkException
-import retrofit2.HttpException
 import java.net.HttpURLConnection
+import retrofit2.HttpException
 
 class ServiceErrorManager {
 

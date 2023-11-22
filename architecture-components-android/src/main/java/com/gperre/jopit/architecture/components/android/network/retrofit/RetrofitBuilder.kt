@@ -2,7 +2,7 @@ package com.gperre.jopit.architecture.components.android.network.retrofit
 
 import androidx.annotation.RestrictTo
 import com.google.gson.GsonBuilder
-import com.gperre.jopit.architecture.components.android.network.adapters.apiresult.ApiResultAdapterFactory
+import com.gperre.jopit.architecture.components.android.network.adapters.apiresult.factory.ApiResultAdapterFactory
 import com.gperre.jopit.architecture.components.android.network.okhttp.OkHttpBuilder
 import javax.inject.Inject
 import retrofit2.Retrofit

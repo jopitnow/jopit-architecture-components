@@ -3,17 +3,17 @@ package com.gperre.jopit.architecture.components.android.network.retrofit
 import com.google.gson.GsonBuilder
 import com.gperre.jopit.architecture.components.android.extensions.addUniqueInstanceConverterFactory
 import com.gperre.jopit.architecture.components.android.extensions.addUniqueInstanceInterceptor
-import com.gperre.jopit.architecture.components.android.network.annotations.required.ServiceClient
 import com.gperre.jopit.architecture.components.android.network.annotations.Timeout
 import com.gperre.jopit.architecture.components.android.network.annotations.required.MockClient
+import com.gperre.jopit.architecture.components.android.network.annotations.required.ServiceClient
 import com.gperre.jopit.architecture.components.android.network.cache.CustomCache
 import com.gperre.jopit.architecture.components.android.network.exceptions.URLException
 import com.gperre.jopit.architecture.components.android.network.interceptors.CacheInterceptor
-import com.gperre.jopit.architecture.components.android.network.utils.NetworkUtils
 import com.gperre.jopit.architecture.components.android.network.url.URLProvider
+import com.gperre.jopit.architecture.components.android.network.utils.NetworkUtils
 import okhttp3.OkHttpClient
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitGenerator constructor(
     private val gson: GsonBuilder,

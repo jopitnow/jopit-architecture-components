@@ -2,14 +2,14 @@ package com.gperre.jopit.architecture.components.android.network.cache.models
 
 import com.gperre.jopit.architecture.components.android.extensions.ZERO_VALUE
 import com.gperre.jopit.architecture.components.android.extensions.empty
+import java.io.BufferedReader
+import java.io.IOException
+import java.util.*
 import okhttp3.*
 import okhttp3.internal.http.StatusLine
 import okhttp3.internal.platform.Platform
 import okio.Buffer
 import okio.ByteString.Companion.encodeUtf8
-import java.io.BufferedReader
-import java.io.IOException
-import java.util.*
 
 class Entry private constructor() {
 

@@ -3,10 +3,10 @@ package com.gperre.jopit.architecture.components.android.network.interceptors
 import androidx.annotation.RestrictTo
 import com.gperre.jopit.architecture.components.android.network.exceptions.NoNetworkException
 import com.gperre.jopit.architecture.components.android.network.utils.NetworkUtils
-import okhttp3.Interceptor
-import okhttp3.Response
 import java.io.IOException
 import javax.inject.Inject
+import okhttp3.Interceptor
+import okhttp3.Response
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 class NetworkStateInterceptor @Inject constructor(

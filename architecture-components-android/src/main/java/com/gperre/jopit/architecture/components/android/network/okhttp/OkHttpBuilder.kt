@@ -1,13 +1,13 @@
 package com.gperre.jopit.architecture.components.android.network.okhttp
 
 import com.gperre.jopit.architecture.components.android.di.NetworkModule.Companion.NAMED_CACHE
-import com.gperre.jopit.architecture.components.android.network.interceptors.header.HeaderInterceptor
 import com.gperre.jopit.architecture.components.android.network.interceptors.NetworkStateInterceptor
-import okhttp3.Cache
-import okhttp3.OkHttpClient
+import com.gperre.jopit.architecture.components.android.network.interceptors.header.HeaderInterceptor
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
+import okhttp3.Cache
+import okhttp3.OkHttpClient
 
 class OkHttpBuilder @Inject constructor(
     @Named(NAMED_CACHE)

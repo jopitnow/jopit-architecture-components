@@ -6,7 +6,6 @@ import com.gperre.jopit.architecture.components.android.network.cache.CustomCach
 import com.gperre.jopit.architecture.components.android.network.okhttp.OkHttpBuilder
 import com.gperre.jopit.architecture.components.android.network.retrofit.RetrofitBuilder
 import com.gperre.jopit.architecture.components.android.network.retrofit.RetrofitGenerator
-import com.gperre.jopit.architecture.components.android.network.url.URLBuilder
 import com.gperre.jopit.architecture.components.android.network.url.URLProvider
 import com.gperre.jopit.architecture.components.android.network.utils.DoubleTypeAdapter
 import com.gperre.jopit.architecture.components.android.network.utils.NetworkUtils

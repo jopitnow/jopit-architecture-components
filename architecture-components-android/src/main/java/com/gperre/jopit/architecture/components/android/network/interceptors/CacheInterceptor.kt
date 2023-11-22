@@ -10,10 +10,15 @@ import com.gperre.jopit.architecture.components.android.network.interceptors.mod
 import com.gperre.jopit.architecture.components.android.network.interceptors.models.InterceptorData.CONTENT_TYPE_VALUE
 import com.gperre.jopit.architecture.components.android.network.interceptors.models.InterceptorData.GET_METHOD
 import com.gperre.jopit.architecture.components.android.network.utils.NetworkUtils
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import retrofit2.Invocation
 import java.util.concurrent.TimeUnit
+import okhttp3.CacheControl
+import okhttp3.Interceptor
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.Protocol
+import okhttp3.Request
+import okhttp3.Response
+import okhttp3.ResponseBody
+import retrofit2.Invocation
 
 internal class CacheInterceptor (
     private val networkUtils: NetworkUtils,

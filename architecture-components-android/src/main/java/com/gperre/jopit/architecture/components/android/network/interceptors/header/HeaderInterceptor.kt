@@ -1,9 +1,9 @@
 package com.gperre.jopit.architecture.components.android.network.interceptors.header
 
 import androidx.annotation.RestrictTo
+import javax.inject.Inject
 import okhttp3.Interceptor
 import okhttp3.Response
-import javax.inject.Inject
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 class HeaderInterceptor @Inject constructor(
