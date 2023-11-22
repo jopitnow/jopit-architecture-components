@@ -7,8 +7,4 @@ import javax.inject.Inject
 class URLBuilder @Inject constructor() {
 
     fun getBaseURL() = "https://api.jopit.com.ar/"
-
-    fun getMockURL() = "https://private-f0a573-jopittest.apiary-mock.com/"
-
-    fun getBackendRawURL() = "http://191.101.15.182/"
 }

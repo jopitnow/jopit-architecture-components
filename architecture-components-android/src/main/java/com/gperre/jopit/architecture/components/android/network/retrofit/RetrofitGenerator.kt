@@ -5,9 +5,9 @@ import com.gperre.jopit.architecture.components.android.extensions.addUniqueInst
 import com.gperre.jopit.architecture.components.android.extensions.addUniqueInstanceInterceptor
 import com.gperre.jopit.architecture.components.android.network.annotations.required.ServiceClient
 import com.gperre.jopit.architecture.components.android.network.annotations.Timeout
+import com.gperre.jopit.architecture.components.android.network.annotations.required.MockClient
 import com.gperre.jopit.architecture.components.android.network.cache.CustomCache
 import com.gperre.jopit.architecture.components.android.network.exceptions.URLException
-import com.gperre.jopit.architecture.components.android.network.interceptors.AnnotationsHandlerInterceptor
 import com.gperre.jopit.architecture.components.android.network.interceptors.CacheInterceptor
 import com.gperre.jopit.architecture.components.android.network.utils.NetworkUtils
 import com.gperre.jopit.architecture.components.android.network.url.URLProvider
@@ -29,7 +29,7 @@ class RetrofitGenerator constructor(
         setInterceptors()
 
         return retrofitBuilder.getBaseBuilder()
-            .baseUrl(getUrl(service))
+            .baseUrl(getURL(service))
             .setFactory()
             .client(okHttpBuilder.build())
             .build()
@@ -37,14 +37,21 @@ class RetrofitGenerator constructor(
     }
 
     private fun setInterceptors() {
-        okHttpBuilder.addUniqueInstanceInterceptor(AnnotationsHandlerInterceptor(urlProvider))
         okHttpBuilder.addUniqueInstanceInterceptor(CacheInterceptor(networkUtils, postCache))
     }
 
-    private fun <T> getUrl(service: Class<T>): String {
+    private fun <T> getURL(service: Class<T>): String {
+        return getMockURL(service) ?: getClientURL(service)
+    }
+
+    private fun <T> getClientURL(service: Class<T>): String {
         return service.getAnnotation(ServiceClient::class.java)?.type?.let { type ->
             urlProvider.get(type)
         } ?: throw URLException("$URL_EXCEPTION_MESSAGE ${service.name}.")
+    }
+
+    private fun <T> getMockURL(service: Class<T>): String? {
+        return service.getAnnotation(MockClient::class.java)?.url
     }
 
     private fun <T> setTimeOutClient(service: Class<T>) {

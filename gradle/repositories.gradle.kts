@@ -3,7 +3,7 @@ allprojects {
         google()
         mavenCentral()
         maven {
-            url = uri("http://api.jopit.com.ar:8081/repository/maven-releases/")
+            url = uri("http://mobile.jopit.com.ar:8081/repository/maven-releases/")
             isAllowInsecureProtocol = true
             credentials {
                 username = System.getenv("NEXUS_JOPIT_USER")
@@ -11,7 +11,7 @@ allprojects {
             }
         }
         maven {
-            url = uri("http://api.jopit.com.ar:8081/repository/maven-experimental/")
+            url = uri("http://mobile.jopit.com.ar:8081/repository/maven-experimental/")
             isAllowInsecureProtocol = true
             credentials {
                 username = System.getenv("NEXUS_JOPIT_USER")

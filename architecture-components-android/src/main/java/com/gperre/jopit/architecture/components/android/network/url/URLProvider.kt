@@ -9,8 +9,6 @@ class URLProvider @Inject constructor(
     fun get(type: URLType): String {
         return when (type) {
             URLType.BASE_MOBILE_SERVICES -> urlBuilder.getBaseURL()
-            URLType.BASE_MOBILE_MOCK -> urlBuilder.getMockURL()
-            URLType.BASE_MOBILE_BACKEND -> urlBuilder.getBackendRawURL()
         }
     }
 }
