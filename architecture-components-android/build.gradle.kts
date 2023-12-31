@@ -1,54 +1,45 @@
 @file:Suppress("UnstableApiUsage")
-import com.gperre.jopit.android.gradle.dependencies.*
 
 plugins {
     id("com.android.library")
-    id("dagger.hilt.android.plugin")
-    kotlin("android")
-    kotlin("kapt")
     id("jopit.configuration")
 }
 
 android {
     namespace = "com.gperre.jopit.architecture.components.android"
-    compileSdk = AndroidSdk.compile
 
     defaultConfig {
-        minSdk = AndroidSdk.min
-        targetSdk = AndroidSdk.target
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+    composeOptions {
+        kotlinCompilerExtensionVersion = jopitCatalog.versions.compose.get()
     }
 
-    hilt {
-        enableAggregatingTask = true
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
-    }
+    kotlinOptions.jvmTarget = jopitCatalog.versions.kotlinJavaTarget.get()
 
     sourceSets["main"].java {
         srcDir("src/main/java")
     }
-
-    packagingOptions {
-        jniLibs.excludes.add("META-INF/licenses/**")
-        jniLibs.excludes.add("META-INF/AL2.0")
-        jniLibs.excludes.add("META-INF/LGPL2.1")
-    }
 }
 
 dependencies {
-    implementation(Okhttp.interceptors)
-    implementation(Okhttp.core)
+    implementation(jopitCatalog.junit)
+    implementation(jopitCatalog.lifecycle.scope)
+    implementation(jopitCatalog.lifecycle.viewmodel)
 
-    implementation(Gson.gson)
+    androidTestImplementation(jopitCatalog.robolectric)
+    androidTestImplementation(jopitCatalog.test.core)
+    androidTestImplementation(jopitCatalog.test.runner)
 
-    implementation(Retrofit.retrofit)
-    implementation(Retrofit.converterGson)
+    implementation(jopitCatalog.hilt.core)
+    implementation(jopitCatalog.hilt.navigationcompose)
+    kapt(jopitCatalog.hilt.compiler)
+    kapt(jopitCatalog.dagger.compiler)
+
+    implementation(jopitCatalog.retrofit)
+    implementation(jopitCatalog.gson.converter)
+    implementation(jopitCatalog.gson)
+    implementation(jopitCatalog.okhttp.core)
+    implementation(jopitCatalog.okhttp.interceptors)
 }
