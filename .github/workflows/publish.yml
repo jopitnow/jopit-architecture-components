@@ -49,7 +49,7 @@ jobs:
       - name: Update Catalog
         uses: convictional/trigger-workflow-and-wait@v1.6.1
         with:
-          owner: guidoperre
+          owner: jopitnow
           repo: jopit-version-catalog
           github_token: ${{ env.GITHUB_CATALOG_TOKEN }}
           workflow_file_name: update_jopit.yml
