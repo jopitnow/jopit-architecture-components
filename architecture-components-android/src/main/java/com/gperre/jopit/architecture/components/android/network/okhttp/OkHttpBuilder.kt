@@ -3,6 +3,7 @@ package com.gperre.jopit.architecture.components.android.network.okhttp
 import com.gperre.jopit.architecture.components.android.di.NetworkModule.Companion.NAMED_CACHE
 import com.gperre.jopit.architecture.components.android.network.interceptors.NetworkStateInterceptor
 import com.gperre.jopit.architecture.components.android.network.interceptors.header.HeaderInterceptor
+import com.gperre.jopit.architecture.components.android.network.interceptors.logger.LoggerInterceptor
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
@@ -14,12 +15,14 @@ class OkHttpBuilder @Inject constructor(
     private val cache: Cache,
     private val networkStateInterceptor: NetworkStateInterceptor,
     private val headerInterceptor: HeaderInterceptor,
+    private val loggerInterceptor: LoggerInterceptor
 ) {
 
     fun getBaseBuilder(): OkHttpClient.Builder {
         val httpClientBuilder = getBaseHttpClient()
         httpClientBuilder.addInterceptor(networkStateInterceptor)
         httpClientBuilder.addInterceptor(headerInterceptor)
+        httpClientBuilder.addInterceptor(loggerInterceptor)
         httpClientBuilder.cache(cache)
         return httpClientBuilder
     }
