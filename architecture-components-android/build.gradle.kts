@@ -24,6 +24,8 @@ android {
 }
 
 dependencies {
+    implementation(jopitCatalog.kotlinx.coroutines.core)
+    implementation(jopitCatalog.kotlinx.coroutines.android)
     implementation(jopitCatalog.junit)
     implementation(jopitCatalog.lifecycle.scope)
     implementation(jopitCatalog.lifecycle.viewmodel)
@@ -42,4 +44,6 @@ dependencies {
     implementation(jopitCatalog.gson)
     implementation(jopitCatalog.okhttp.core)
     implementation(jopitCatalog.okhttp.interceptors)
+
+    implementation(jopitCatalog.jopit.debug)
 }
