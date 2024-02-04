@@ -1,5 +1,6 @@
 package com.gperre.jopit.architecture.components.android.network.interceptors.logger
 
+import com.gperre.jopit.architecture.components.android.extensions.empty
 import java.nio.charset.Charset
 import javax.inject.Inject
 import okhttp3.Request
@@ -30,7 +31,7 @@ class RetrofitCurlGenerator @Inject constructor() {
 
         command = command.argument("-i" to "'${request.url}'")
 
-        return command.toString()
+        return command.toString().replace("\\\n", String.empty())
     }
 
     private fun RequestBody.toCommand(): String? {

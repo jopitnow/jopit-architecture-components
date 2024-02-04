@@ -3,9 +3,10 @@ package com.gperre.jopit.architecture.components.android.network.interceptors.lo
 import android.util.Log
 import androidx.annotation.RestrictTo
 import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.gperre.jopit.android.debug.domain.model.debug.networking.NetworkItem
 import com.gperre.jopit.android.debug.domain.repositories.debug.DebugRepository
-import com.gperre.jopit.architecture.components.android.BuildConfig
 import com.gperre.jopit.architecture.components.android.coroutines.result.onFailure
 import com.gperre.jopit.architecture.components.android.coroutines.result.resultOf
 import com.gperre.jopit.architecture.components.android.extensions.getFormattedDate
@@ -14,8 +15,6 @@ import javax.inject.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Interceptor
-import okhttp3.Response
 import okhttp3.*
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
@@ -52,16 +51,18 @@ class LoggerInterceptor @Inject constructor(
     }
 
     private fun Response.getNetworkItem(curl: String) = NetworkItem(
-        title = this::class.java.simpleName,
+        title = this.request.url.encodedPath,
         date = Date().getFormattedDate(DATE_FORMAT),
         label = if (isSuccessful) "SUCCESS" else "ERROR",
-        module = BuildConfig.LIBRARY_PACKAGE_NAME,
+        module = "android-module", // TODO: Change to requester module name when it is implemented.
         url = this.request.url.toString(),
         method = this.request.method,
         curl = curl,
         requestHeaders = this.request.headers.toMap(),
         responseHeaders = this.headers.toMap(),
-        responseBody = this.body?.string()
+        responseBody = if (isSuccessful) this.body?.let {
+            JsonParser.parseString(it.string()) as? JsonObject
+        } else null
     )
 
     private fun Headers.toMap(): MutableMap<String, String> {
