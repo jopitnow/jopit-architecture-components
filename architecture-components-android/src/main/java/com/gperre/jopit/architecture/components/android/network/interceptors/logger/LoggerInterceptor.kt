@@ -53,14 +53,14 @@ class LoggerInterceptor @Inject constructor(
     private fun Response.getNetworkItem(curl: String) = NetworkItem(
         title = this.request.url.encodedPath,
         date = Date().getFormattedDate(DATE_FORMAT),
-        label = if (isSuccessful) "SUCCESS" else "ERROR",
+        label = this.code.toString(),
         module = "android-module", // TODO: Change to requester module name when it is implemented.
         url = this.request.url.toString(),
         method = this.request.method,
         curl = curl,
         requestHeaders = this.request.headers.toMap(),
         responseHeaders = this.headers.toMap(),
-        responseBody = if (isSuccessful) this.body?.let {
+        responseBody = if (headers.isJSONResponse()) this.body?.let {
             JsonParser.parseString(it.string()) as? JsonObject
         } else null
     )
@@ -75,6 +75,10 @@ class LoggerInterceptor @Inject constructor(
         }
 
         return headersMap
+    }
+
+    private fun Headers.isJSONResponse(): Boolean {
+        return get("Content-Type")?.contains("application/json") ?: false
     }
 
     companion object {
