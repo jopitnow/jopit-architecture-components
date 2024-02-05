@@ -59,9 +59,9 @@ class LoggerInterceptor @Inject constructor(
         url = this.request.url.toString(),
         method = this.request.method,
         curl = curl,
-        requestBody = if (this.request.headers.isJSONContent()) this.request.body?.string()?.let {
+        requestBody = this.request.body?.string()?.let {
             JsonParser.parseString(it) as? JsonObject
-        } else null,
+        },
         requestHeaders = this.request.headers.toMap(),
         responseHeaders = this.headers.toMap(),
         responseBody = if (this.headers.isJSONContent()) this.body?.let {
