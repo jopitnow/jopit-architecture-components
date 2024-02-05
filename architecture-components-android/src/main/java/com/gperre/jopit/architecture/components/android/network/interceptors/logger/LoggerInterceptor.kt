@@ -61,7 +61,7 @@ class LoggerInterceptor @Inject constructor(
         requestHeaders = this.request.headers.toMap(),
         responseHeaders = this.headers.toMap(),
         responseBody = if (headers.isJSONResponse()) this.body?.let {
-            JsonParser.parseString(it.string()) as? JsonObject
+            JsonParser.parseString(peakBody()) as? JsonObject
         } else null
     )
 
@@ -75,6 +75,10 @@ class LoggerInterceptor @Inject constructor(
         }
 
         return headersMap
+    }
+
+    private fun Response.peakBody(): String {
+        return peekBody(Long.MAX_VALUE).string()
     }
 
     private fun Headers.isJSONResponse(): Boolean {
