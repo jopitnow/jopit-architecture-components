@@ -16,6 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.*
+import okio.Buffer
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 class LoggerInterceptor @Inject constructor(
@@ -58,9 +59,12 @@ class LoggerInterceptor @Inject constructor(
         url = this.request.url.toString(),
         method = this.request.method,
         curl = curl,
+        requestBody = if (this.request.headers.isJSONContent()) this.request.body?.string()?.let {
+            JsonParser.parseString(it) as? JsonObject
+        } else null,
         requestHeaders = this.request.headers.toMap(),
         responseHeaders = this.headers.toMap(),
-        responseBody = if (headers.isJSONResponse()) this.body?.let {
+        responseBody = if (this.headers.isJSONContent()) this.body?.let {
             JsonParser.parseString(peakBody()) as? JsonObject
         } else null
     )
@@ -77,11 +81,17 @@ class LoggerInterceptor @Inject constructor(
         return headersMap
     }
 
+    private fun RequestBody.string() = runCatching {
+        val buffer = Buffer()
+        writeTo(buffer)
+        buffer.readUtf8()
+    }.getOrNull()
+
     private fun Response.peakBody(): String {
         return peekBody(Long.MAX_VALUE).string()
     }
 
-    private fun Headers.isJSONResponse(): Boolean {
+    private fun Headers.isJSONContent(): Boolean {
         return get("Content-Type")?.contains("application/json") ?: false
     }
 
