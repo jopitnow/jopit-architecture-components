@@ -6,7 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.gperre.jopit.android.debug.domain.model.debug.networking.NetworkItem
-import com.gperre.jopit.android.debug.domain.repositories.debug.DebugRepository
+import com.gperre.jopit.android.debug.domain.repositories.base.DebugRepository
 import com.gperre.jopit.architecture.components.android.coroutines.result.onFailure
 import com.gperre.jopit.architecture.components.android.coroutines.result.resultOf
 import com.gperre.jopit.architecture.components.android.extensions.getFormattedDate
@@ -21,7 +21,7 @@ import okio.Buffer
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 class LoggerInterceptor @Inject constructor(
     private val generator: RetrofitCurlGenerator,
-    private val repository: DebugRepository
+    private val repository: DebugRepository<NetworkItem>
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -48,7 +48,7 @@ class LoggerInterceptor @Inject constructor(
     }
 
     private suspend fun setNetworkRequest(item: NetworkItem) = resultOf {
-        repository.setNetworkRequest(item)
+        repository.set(item)
     }
 
     private fun Response.getNetworkItem(curl: String) = NetworkItem(
